@@ -9,7 +9,7 @@ import {
 export const CvContext = createContext<CvContextProps>({} as CvContextProps);
 
 export const CvProvider = ({ children }: { children: React.ReactNode }) => {
-  const [index, setIndex] = useState(3);
+  const [index, setIndex] = useState(4);
   const [expanded, setExpanded] = useState({ 0: true });
 
   const [profile, setProfile] = useState<IProfile>({
@@ -33,6 +33,21 @@ export const CvProvider = ({ children }: { children: React.ReactNode }) => {
         startDate: new Date(),
         studyingHere: false,
         level: "",
+      },
+    ],
+    activities: [
+      {
+        area: "",
+        companyName: "",
+        description: "",
+        endDate: "",
+        hierarchy: "",
+        idExperienceLaborum: "",
+        imgUrl: "",
+        jobPosition: "",
+        location: "",
+        startDate: "",
+        workHere: false,
       },
     ],
   });

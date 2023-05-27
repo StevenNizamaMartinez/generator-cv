@@ -35,7 +35,22 @@ export interface IProfile {
   adress: string;
   dni: string;
   education: IEducation[];
+  activities: IActivities[];
 }
+
+export type IActivities = {
+  area: string;
+  companyName: string;
+  description: string;
+  endDate: any;
+  hierarchy: string;
+  idExperienceLaborum: string;
+  imgUrl: string;
+  jobPosition: string;
+  location: string;
+  startDate: any;
+  workHere: boolean;
+};
 
 export type IEducation = {
   academicArea: string;
