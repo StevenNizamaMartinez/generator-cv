@@ -9,8 +9,10 @@ import {
 export const CvContext = createContext<CvContextProps>({} as CvContextProps);
 
 export const CvProvider = ({ children }: { children: React.ReactNode }) => {
-  const [index, setIndex] = useState(4);
-  const [expanded, setExpanded] = useState({ 0: true });
+  const [index, setIndex] = useState(0);
+  const [expanded, setExpanded] = useState<Record<number, boolean>>({
+    0: true,
+  });
 
   const [profile, setProfile] = useState<IProfile>({
     name: "",
@@ -19,6 +21,12 @@ export const CvProvider = ({ children }: { children: React.ReactNode }) => {
     phone: "",
     adress: "",
     dni: "",
+    seminars: [
+      {
+        name: "",
+        place: "",
+      },
+    ],
     education: [
       {
         academicArea: "",
@@ -26,11 +34,11 @@ export const CvProvider = ({ children }: { children: React.ReactNode }) => {
         condition: "incompleto",
         degree: "",
         description: "",
+        startDate: new Date(),
         endDate: new Date(),
         idEducationLaborum: "",
         imgUrl: "",
         institutionName: "",
-        startDate: new Date(),
         studyingHere: false,
         level: "",
       },
@@ -40,16 +48,38 @@ export const CvProvider = ({ children }: { children: React.ReactNode }) => {
         area: "",
         companyName: "",
         description: "",
-        endDate: "",
+        startDate: new Date(),
+        endDate: new Date(),
         hierarchy: "",
         idExperienceLaborum: "",
         imgUrl: "",
         jobPosition: "",
         location: "",
-        startDate: "",
         workHere: false,
       },
     ],
+    knowledge: [
+      {
+        knowledgeName: "",
+        level: "",
+      },
+    ],
+    experience: [
+      {
+        area: "",
+        companyName: "",
+        description: "",
+        startDate: new Date(),
+        endDate: new Date(),
+        hierarchy: "",
+        idExperienceLaborum: "",
+        imgUrl: "",
+        jobPosition: "",
+        location: "",
+        workHere: false,
+      },
+    ],
+    achievements: "",
   });
   const [experience, setExperience] = useState<IExperience>({
     area: "",

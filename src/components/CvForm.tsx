@@ -1,43 +1,37 @@
-import { Box, Button, Container } from "@mui/material";
+import { Box, Button, Container, Grid } from "@mui/material";
 import UserData from "./form/UserData";
 import UserSumary from "./form/UserSumary";
 import useCvContext from "../custom/useCvContext";
 import UserEducation from "./form/UserEducation";
-import UserTech from "./form/UserTech";
-import UserActivities from "./form/UserActivities";
+import UserKnowledge from "./form/UserKnowledge";
+import UserExperience from "./form/UserExperience";
+import UserSeminars from "./form/UserSeminars";
+import UserAchievements from "./form/UserAchievements";
+import CvButtons from "./CvButtons";
 
 function CvForm() {
-  const { index, setIndex } = useCvContext();
+  const { index } = useCvContext();
 
   return (
-    <>
-      <Box>
-        <Container
-          sx={{
-            marginBlock: "24px",
-            gap: "24px",
-          }}
-        >
-          <Box component="form" onSubmit={(e) => e.preventDefault()}>
-            {index === 0 ? <UserData /> : null}
-            {index === 1 ? <UserSumary /> : null}
-            {index === 2 ? <UserEducation /> : null}
-            {index === 3 ? <UserTech /> : null}
-            {index === 4 ? <UserActivities /> : null}
-            <Box mt={4}>
-              {index === 0 ? null : (
-                <Button variant="contained" onClick={() => setIndex(index - 1)}>
-                  Anterior
-                </Button>
-              )}
-              <Button variant="contained" onClick={() => setIndex(index + 1)}>
-                Siguiente
-              </Button>
-            </Box>
-          </Box>
-        </Container>
+    <Container
+      sx={{
+        minWidth: "280px",
+        width: "50%",
+      }}
+    >
+      <Box component="form" onSubmit={(e) => e.preventDefault()}>
+        <>
+          {index === 0 ? <UserData /> : null}
+          {index === 1 ? <UserSumary /> : null}
+          {index === 2 ? <UserEducation /> : null}
+          {index === 3 ? <UserKnowledge /> : null}
+          {index === 4 ? <UserExperience /> : null}
+          {index === 5 ? <UserSeminars /> : null}
+          {index === 6 ? <UserAchievements /> : null}
+        </>
+        <CvButtons maxIndex={6} />
       </Box>
-    </>
+    </Container>
   );
 }
 

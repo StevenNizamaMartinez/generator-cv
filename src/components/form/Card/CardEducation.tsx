@@ -5,21 +5,28 @@ import CardContent from "@mui/material/CardContent";
 import Collapse from "@mui/material/Collapse";
 import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
+import DeleteIcon from "@mui/icons-material/Delete";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {
   Box,
-  FormControl,
   FormGroup,
+  Grid,
+  Input,
   MenuItem,
   Select,
   TextField,
   ToggleButton,
   ToggleButtonGroup,
+  useMediaQuery,
 } from "@mui/material";
-import { degreeEducation, nivelEducacion } from "../../../utils/education";
+import { degreeEducation, nivelEducacion } from "../../../data/education";
 import { useState } from "react";
 import useCvContext from "../../../custom/useCvContext";
-import { IEducation } from "../../../types/context";
+import { ICard, IEducation } from "../../../types/context";
+import ModalDelete from "../../modal/ModalDelete";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs, { Dayjs } from "dayjs";
+import { deleteExpand } from "../../../utils/deleteExpand";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -29,7 +36,7 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   const { ...other } = props;
   return <IconButton {...other} />;
 })(({ theme, expand }) => ({
-  transform: expand ? "rotate(180deg)" : "rotate(0deg)",
+  transform: expand === true ? "rotate(180deg)" : "rotate(0deg)",
   marginLeft: "auto",
   transition: theme.transitions.create("transform", {
     duration: theme.transitions.duration.shortest,
@@ -38,40 +45,24 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 // Componente
 
-export default function CardEducation({ index }: { index: number }) {
+export default function CardEducation({ index, expanded, setExpanded }: ICard) {
   const {
     profile: { education },
     setProfile,
-    expanded,
-    setExpanded,
   } = useCvContext();
 
   const [level, setLevel] = useState(education[index].level);
   const [degree, setDegree] = useState(education[index].degree);
+  const isMobile = useMediaQuery("(max-width:750px)");
+
+  const [open, setOpen] = useState(false);
 
   const handleExpandClick = () => {
     setExpanded((prevState: { [key: number]: boolean }) => ({
       ...prevState,
-      [index]: !prevState[index], // Cambia el estado expandido de la tarjeta
+      [index]: !prevState[index],
     }));
   };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedDate = new Date(e.currentTarget.value);
-
-    const year = selectedDate.getFullYear();
-    const month = String(selectedDate.getMonth() + 1).padStart(2, "0");
-    const day = String(selectedDate.getDate()).padStart(2, "0");
-
-    const formattedDate = `${year}-${month}-${day}`;
-    const updatedEducation = {
-      ...education[index],
-      [e.currentTarget.name]: formattedDate,
-    };
-    updateEducation(updatedEducation);
-  };
-
-  console.log(education[index]);
 
   const updateEducation = (updatedEducation: IEducation) => {
     const updatedEducationList = [...education];
@@ -82,41 +73,93 @@ export default function CardEducation({ index }: { index: number }) {
     }));
   };
 
+  const handleDelete = () => {
+    const updatedEducationList = [...education];
+    updatedEducationList.splice(index, 1);
+    setProfile((prevProfile) => ({
+      ...prevProfile,
+      education: updatedEducationList,
+    }));
+    setExpanded(deleteExpand(expanded, index));
+    setOpen(false);
+  };
+
   return (
-    <Card sx={{ minWidth: "300px", width: "500px" }}>
-      {expanded[index] ? (
-        <CardHeader
-          title={
-            education[index].career.length > 0
-              ? education[index].career
-              : "Carrera"
-          }
-        />
-      ) : (
-        <CardHeader title={education[index].career} />
-      )}
-      <ExpandMore
-        expand={expanded[index]}
-        onClick={handleExpandClick}
-        aria-label="show more"
-      >
-        <ExpandMoreIcon />
-      </ExpandMore>
-      <Collapse in={expanded[index]} timeout="auto" unmountOnExit>
-        <CardContent>
-          <FormGroup
+    <>
+      <Card sx={{ width: "100%", height: "100%" }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "12px",
+          }}
+        >
+          <DeleteIcon sx={{ color: "red" }} onClick={() => setOpen(true)} />
+          <ModalDelete
+            open={open}
+            setOpen={setOpen}
+            handleDelete={handleDelete}
+            textButton="Eliminar Educación"
+          />
+          <CardHeader
             sx={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "18px",
+              width: "100%",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
             }}
-          >
-            <FormControl>
+            title={
+              !expanded[index] ? (
+                <Typography variant="h6" fontSize="16px" fontWeight="bold">
+                  {education[index].career}
+                  <br />
+                  {education[index].institutionName}
+                </Typography>
+              ) : (
+                <Typography variant="h6" fontSize="16px" fontWeight="bold">
+                  Educación
+                </Typography>
+              )
+            }
+            action={
+              <ExpandMore
+                expand={expanded[index]}
+                onClick={handleExpandClick}
+                aria-label="show more"
+              >
+                <ExpandMoreIcon />
+              </ExpandMore>
+            }
+          />
+        </Box>
+        <Collapse in={expanded[index]} timeout="auto" unmountOnExit>
+          <CardContent>
+            <FormGroup
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "18px",
+              }}
+            >
+              <Input
+                size="small"
+                placeholder="Centro de Estudios"
+                name="institutionName"
+                value={education[index].institutionName}
+                onChange={(e) => {
+                  const updatedEducation = {
+                    ...education[index],
+                    institutionName: e.target.value,
+                  };
+                  updateEducation(updatedEducation);
+                }}
+              />
               <Select
                 labelId="level"
+                size="small"
                 id="level"
                 value={level}
-                label="Nivel Academico"
+                placeholder="Nivel de Educación"
                 onChange={(e) => {
                   const updatedEducation = {
                     ...education[index],
@@ -132,101 +175,106 @@ export default function CardEducation({ index }: { index: number }) {
                   </MenuItem>
                 ))}
               </Select>
-            </FormControl>
+              {education[index].level === "universitario" ? (
+                <Select
+                  size="small"
+                  labelId="degree"
+                  placeholder="Grado Universitario"
+                  id="degree"
+                  value={degree}
+                  onChange={(e) => {
+                    const updatedEducation = {
+                      ...education[index],
+                      degree: e.target.value,
+                    };
+                    setDegree(e.target.value);
+                    updateEducation(updatedEducation);
+                  }}
+                >
+                  {degreeEducation.map((degree) => (
+                    <MenuItem key={degree.value} value={degree.value}>
+                      {degree.label}
+                    </MenuItem>
+                  ))}
+                </Select>
+              ) : null}
 
-            <TextField
-              placeholder="Centro de Estudios"
-              name="institutionName"
-              value={education[index].institutionName}
-              onChange={(e) => {
-                const updatedEducation = {
-                  ...education[index],
-                  institutionName: e.target.value,
-                };
-                updateEducation(updatedEducation);
-              }}
-            />
-            <TextField
-              placeholder="Carrera"
-              name="career"
-              value={education[index].career}
-              onChange={(e) => {
-                const updatedEducation = {
-                  ...education[index],
-                  career: e.target.value,
-                };
-                updateEducation(updatedEducation);
-              }}
-            />
-            <ToggleButtonGroup
-              color="secondary"
-              exclusive
-              onChange={(_, value) => {
-                const updatedEducation = {
-                  ...education[index],
-                  condition: value,
-                };
-                updateEducation(updatedEducation);
-              }}
-              value={
-                education[index].condition
-                  ? education[index].condition
-                  : "completo"
-              }
-            >
-              <ToggleButton value="completo">Completo</ToggleButton>
-              <ToggleButton value="incompleto">Incompleto</ToggleButton>
-              <ToggleButton value="cursando">Cursando</ToggleButton>
-            </ToggleButtonGroup>
-            {education[index].condition === "completo" ? (
-              <Select
-                labelId="degree"
-                id="degree"
-                value={degree}
+              <TextField
+                placeholder="Carrera"
+                size="small"
+                name="career"
+                value={education[index].career}
                 onChange={(e) => {
                   const updatedEducation = {
                     ...education[index],
-                    degree: e.target.value,
+                    career: e.target.value,
                   };
-                  setDegree(e.target.value);
                   updateEducation(updatedEducation);
                 }}
+              />
+              <ToggleButtonGroup
+                orientation={isMobile ? "vertical" : "horizontal"}
+                size="small"
+                color="secondary"
+                exclusive
+                onChange={(_, value) => {
+                  const updatedEducation = {
+                    ...education[index],
+                    condition: value,
+                  };
+                  updateEducation(updatedEducation);
+                }}
+                value={
+                  education[index].condition
+                    ? education[index].condition
+                    : "completo"
+                }
               >
-                {degreeEducation.map((degree) => (
-                  <MenuItem key={degree.value} value={degree.value}>
-                    {degree.label}
-                  </MenuItem>
-                ))}
-              </Select>
-            ) : null}
-            <Box display="flex" gap="12px" alignItems="center">
-              <TextField
-                name="startDate"
-                type="date"
-                onChange={handleChange}
-                value={education[index].startDate}
-                label="Fecha de Inicio"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-              <Typography variant="h6">-</Typography>
-              <TextField
-                name="endDate"
-                type="date"
-                disabled={education[index].condition === "cursando"}
-                value={education[index].endDate}
-                onChange={handleChange}
-                label="Fecha de Fin"
-                InputLabelProps={{
-                  shrink: true,
-                  placeholder: "Fecha de Fin",
-                }}
-              />
-            </Box>
-          </FormGroup>
-        </CardContent>
-      </Collapse>
-    </Card>
+                <ToggleButton value="completo">Completo</ToggleButton>
+                <ToggleButton value="incompleto">Incompleto</ToggleButton>
+                <ToggleButton value="cursando">Cursando</ToggleButton>
+              </ToggleButtonGroup>
+
+              <Grid container gap="20px" sx={{ width: "100%" }}>
+                <Grid>
+                  <DatePicker
+                    label={"Fecha de Inicio"}
+                    views={["month", "year"]}
+                    format="MM/YYYY"
+                    value={dayjs(education[index].startDate)}
+                    onChange={(date: Dayjs | null) => {
+                      const updatedEducation = {
+                        ...education[index],
+                        startDate: new Date(dayjs(date).format()),
+                      };
+                      updateEducation(updatedEducation);
+                      console.log(dayjs(date).format());
+                    }}
+                  />
+                </Grid>
+                <Grid>
+                  <DatePicker
+                    label={"Fecha de Finalización"}
+                    views={["month", "year"]}
+                    format="MM/YYYY"
+                    value={dayjs(education[index].endDate)}
+                    disabled={
+                      education[index].condition === "cursando" ? true : false
+                    }
+                    onChange={(date: Dayjs | null) => {
+                      const updatedEducation = {
+                        ...education[index],
+                        endDate: new Date(dayjs(date).format()),
+                      };
+                      updateEducation(updatedEducation);
+                    }}
+                  />
+                </Grid>
+              </Grid>
+            </FormGroup>
+          </CardContent>
+        </Collapse>
+      </Card>
+    </>
   );
 }

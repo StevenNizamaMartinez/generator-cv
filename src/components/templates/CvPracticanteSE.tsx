@@ -6,7 +6,7 @@ import {
   Text,
   View,
 } from "@react-pdf/renderer";
-import { styles } from "../../utils/styles";
+import { styles } from "../../data/styles";
 import useCvContext from "../../custom/useCvContext";
 import image from "../../assets/image.jpg";
 

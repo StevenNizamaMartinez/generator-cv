@@ -4,16 +4,16 @@ export const nivelEducacion = [
     label: "Secundaria",
   },
   {
-    value: "universidad",
-    label: "Universidad",
+    value: "instituto",
+    label: "Instituto",
+  },
+  {
+    value: "universitario",
+    label: "Universitario",
   },
   {
     value: "curso",
-    label: "Curso",
-  },
-  {
-    value: "taller",
-    label: "Taller",
+    label: "Curso / Taller",
   },
   {
     value: "diplomado",

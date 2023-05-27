@@ -19,15 +19,24 @@ dependencies:
   '@mui/material':
     specifier: ^5.13.1
     version: 5.13.1(@emotion/react@11.11.0)(@emotion/styled@11.11.0)(@types/react@18.2.6)(react-dom@18.2.0)(react@18.2.0)
+  '@mui/x-date-pickers':
+    specifier: ^6.5.0
+    version: 6.5.0(@emotion/react@11.11.0)(@emotion/styled@11.11.0)(@mui/base@5.0.0-beta.2)(@mui/material@5.13.1)(@mui/system@5.13.2)(dayjs@1.11.7)(react-dom@18.2.0)(react@18.2.0)
   '@react-pdf/renderer':
     specifier: ^3.1.9
     version: 3.1.9(react@18.2.0)
+  dayjs:
+    specifier: ^1.11.7
+    version: 1.11.7
   react:
     specifier: ^18.2.0
     version: 18.2.0
   react-dom:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
+  react-hot-toast:
+    specifier: ^2.4.1
+    version: 2.4.1(csstype@3.1.2)(react-dom@18.2.0)(react@18.2.0)
   react-router-dom:
     specifier: ^6.11.2
     version: 6.11.2(react-dom@18.2.0)(react@18.2.0)
@@ -985,6 +994,60 @@ packages:
       react-is: 18.2.0
     dev: false
 
+  /@mui/x-date-pickers@6.5.0(@emotion/react@11.11.0)(@emotion/styled@11.11.0)(@mui/base@5.0.0-beta.2)(@mui/material@5.13.1)(@mui/system@5.13.2)(dayjs@1.11.7)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-dRCO1mzHjfOqsa4LdKxiXQnV0cuGiAkliyxSDCdRn6clK2WdF9Oj+1+4Mkx7fcJA61SV1eP4Yg29s0/VDsZKZw==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      '@emotion/react': ^11.9.0
+      '@emotion/styled': ^11.8.1
+      '@mui/base': ^5.0.0-alpha.87
+      '@mui/material': ^5.8.6
+      '@mui/system': ^5.8.0
+      date-fns: ^2.25.0
+      date-fns-jalali: ^2.13.0-0
+      dayjs: ^1.10.7
+      luxon: ^3.0.2
+      moment: ^2.29.4
+      moment-hijri: ^2.1.2
+      moment-jalaali: ^0.7.4 || ^0.8.0 || ^0.9.0 || ^0.10.0
+      react: ^17.0.2 || ^18.0.0
+      react-dom: ^17.0.2 || ^18.0.0
+    peerDependenciesMeta:
+      '@emotion/react':
+        optional: true
+      '@emotion/styled':
+        optional: true
+      date-fns:
+        optional: true
+      date-fns-jalali:
+        optional: true
+      dayjs:
+        optional: true
+      luxon:
+        optional: true
+      moment:
+        optional: true
+      moment-hijri:
+        optional: true
+      moment-jalaali:
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.21.5
+      '@emotion/react': 11.11.0(@types/react@18.2.6)(react@18.2.0)
+      '@emotion/styled': 11.11.0(@emotion/react@11.11.0)(@types/react@18.2.6)(react@18.2.0)
+      '@mui/base': 5.0.0-beta.2(@types/react@18.2.6)(react-dom@18.2.0)(react@18.2.0)
+      '@mui/material': 5.13.1(@emotion/react@11.11.0)(@emotion/styled@11.11.0)(@types/react@18.2.6)(react-dom@18.2.0)(react@18.2.0)
+      '@mui/system': 5.13.2(@emotion/react@11.11.0)(@emotion/styled@11.11.0)(@types/react@18.2.6)(react@18.2.0)
+      '@mui/utils': 5.13.1(react@18.2.0)
+      '@types/react-transition-group': 4.4.6
+      clsx: 1.2.1
+      dayjs: 1.11.7
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-transition-group: 4.4.5(react-dom@18.2.0)(react@18.2.0)
+    dev: false
+
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
     engines: {node: '>= 8'}
@@ -1554,6 +1617,10 @@ packages:
   /csstype@3.1.2:
     resolution: {integrity: sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==}
 
+  /dayjs@1.11.7:
+    resolution: {integrity: sha512-+Yw9U6YO5TQohxLcIkrXBeY73WP3ejHWVvx8XCk3gxvQDCTEmS48ZrSZCKciI7Bhl/uCMyxYtE9UqRILmFphkQ==}
+    dev: false
+
   /debug@4.3.4:
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
     engines: {node: '>=6.0'}
@@ -1930,6 +1997,14 @@ packages:
       merge2: 1.4.1
       slash: 3.0.0
     dev: true
+
+  /goober@2.1.13(csstype@3.1.2):
+    resolution: {integrity: sha512-jFj3BQeleOoy7t93E9rZ2de+ScC4lQICLwiAQmKMg9F6roKGaLSHoCDYKkWlSafg138jejvq/mTdvmnwDQgqoQ==}
+    peerDependencies:
+      csstype: ^3.0.10
+    dependencies:
+      csstype: 3.1.2
+    dev: false
 
   /grapheme-splitter@1.0.4:
     resolution: {integrity: sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==}
@@ -2332,6 +2407,20 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
+
+  /react-hot-toast@2.4.1(csstype@3.1.2)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-j8z+cQbWIM5LY37pR6uZR6D4LfseplqnuAO4co4u8917hBUvXlEqyP1ZzqVLcqoyUesZZv/ImreoCeHVDpE5pQ==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      goober: 2.1.13(csstype@3.1.2)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    transitivePeerDependencies:
+      - csstype
     dev: false
 
   /react-is@16.13.1:

@@ -16,7 +16,7 @@ import {
   ToggleButton,
   ToggleButtonGroup,
 } from "@mui/material";
-import { degreeEducation, nivelEducacion } from "../../../utils/education";
+import { degreeEducation, nivelEducacion } from "../../../data/education";
 import { useState } from "react";
 import useCvContext from "../../../custom/useCvContext";
 import { IActivities } from "../../../types/context";
