@@ -45,7 +45,7 @@ export const styles = StyleSheet.create({
     width: "55%",
     height: "2px",
     backgroundColor: "#BCA97E",
-    marginBottom: "4px",
+    marginVertical: "8px",
   },
   lineHeader: {
     width: "92%",
