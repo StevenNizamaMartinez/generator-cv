@@ -1,14 +1,16 @@
-import { FormGroup, Grid, TextField } from "@mui/material";
+import { FormGroup, Grid, Input, TextField } from "@mui/material";
 import useCvContext from "../../custom/useCvContext";
 import TitleForm from "../TitleForm";
-import { MuiFileInput } from "mui-file-input";
+import React from "react";
 
 function UserData() {
-  const { profile, setProfile, file, setFile } = useCvContext();
+  const { profile, setProfile, setFile } = useCvContext();
 
-  const handleChange = (newFile: File | null) => {
-    console.log(newFile);
-    setFile(newFile);
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = event.currentTarget.files?.[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+    }
   };
 
   return (
@@ -67,12 +69,12 @@ function UserData() {
           placeholder="12345678"
           onChange={(e) => setProfile({ ...profile, dni: e.target.value })}
         />
-        <MuiFileInput
-          size="small"
-          variant="outlined"
-          value={file}
-          label="Foto de Perfil"
-          onChange={handleChange}
+
+        <Input
+          type="file"
+          inputProps={{ accept: "image/*" }}
+          name="file"
+          onChange={handleFileChange}
         />
       </Grid>
     </FormGroup>

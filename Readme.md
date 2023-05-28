@@ -6,6 +6,10 @@ Proyecto para generar cv utilizando React y Material UI
 
 Instrucciones básicas para usar el proyecto
 
+## Live
+
+https://stevennizamamartinez.github.io/generator-cv/
+
 ### Installing
 
 Clona el repositorio del proyecto en tu máquina local. Puedes hacerlo usando el siguiente comando en tu terminal:
@@ -31,9 +35,3 @@ npm run dev
 Me esta faltando : 
  - Refactorizar el codigo
  - Añadir el selector de colores
-
-
-### Observación
-
-En el componente de UserData hay un error de tipado debido a que la biblioteca 
-para subir imagenes no me permite instalar los tipos de datos

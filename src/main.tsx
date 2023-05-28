@@ -11,7 +11,7 @@ import { Toaster } from "react-hot-toast";
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <CvProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/generator-cv">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <App />
           <Toaster />

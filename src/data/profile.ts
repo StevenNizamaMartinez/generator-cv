@@ -1,4 +1,7 @@
-import { IProfile } from "../types/profile";
+type IProfile = {
+  id: string;
+  title: string;
+};
 
 export const profiles: IProfile[] = [
   {
