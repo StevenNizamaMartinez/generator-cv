@@ -25,3 +25,15 @@ Finalmente inicia el proyecto con el comando (o también usando pnpm)
 ```
 npm run dev
 ```
+
+### Faltantes
+
+Me esta faltando : 
+ - Refactorizar el codigo
+ - Añadir el selector de colores
+
+
+### Observación
+
+En el componente de UserData hay un error de tipado debido a que la biblioteca 
+para subir imagenes no me permite instalar los tipos de datos
