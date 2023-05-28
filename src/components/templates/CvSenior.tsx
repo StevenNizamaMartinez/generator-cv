@@ -63,39 +63,61 @@ function CvSenior() {
           <View style={styles.line}></View>
           <View>
             <Text style={styles.title}>EXPERIENCIA LABORAL</Text>
-            {profile.experience.map((exp) => (
-              <>
-                <Text style={styles.subTitle}>Nombre de la Empresa</Text>
-                <Text>{exp.jobPosition}</Text>
-                <View style={{ flexDirection: "row", marginBottom: 4 }}>
-                  <Text style={{ marginHorizontal: 8 }}>•</Text>
-                  <Text>Funciones:</Text>
+            {profile.experience
+              .filter((exp) => {
+                return parseInt(dayjs(exp.startDate).format("YY")) > 16;
+              })
+              .map((exp) => (
+                <>
+                  <Text style={styles.subTitle}>{exp.companyName}</Text>
+                  <Text>{exp.jobPosition}</Text>
+                  <View style={{ flexDirection: "row", marginBottom: 4 }}>
+                    <Text style={{ marginHorizontal: 8 }}>•</Text>
+                    <Text>Funciones:</Text>
+                  </View>
+                  <Text>
+                    {dayjs(exp.startDate).format("YYYY-MM")} -{" "}
+                    {dayjs(exp.endDate).format("YYYY-MM")}
+                  </Text>
+                  <Text>{exp.description}</Text>
+                  <Text>Logros</Text>
+                </>
+              ))}
+          </View>
+          {profile.experience.filter((exp) => {
+            return parseInt(dayjs(exp.startDate).format("YY")) < 16;
+          }).length > 0 ? (
+            <>
+              <View style={styles.line}></View>
+              <View>
+                <Text style={styles.title}>PERIODO 2013-2016</Text>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    marginBottom: 4,
+                    width: "80%",
+                  }}
+                >
+                  {profile.experience
+                    .filter((exp) => {
+                      return parseInt(dayjs(exp.startDate).format("YY")) < 16;
+                    })
+                    .map((exp) => (
+                      <>
+                        <View style={{ flexDirection: "row", width: "50%" }}>
+                          <Text style={{ marginHorizontal: 8 }}>•</Text>
+                          <Text>
+                            {exp.jobPosition} -{" "}
+                            {dayjs(exp.startDate).format("YYYY-MM")} -{" "}
+                            {dayjs(exp.endDate).format("YYYY-MM")}
+                          </Text>
+                        </View>
+                      </>
+                    ))}
                 </View>
-                <Text>
-                  {dayjs(exp.startDate).format("YYYY-MM")} -{" "}
-                  {dayjs(exp.endDate).format("YYYY-MM")}
-                </Text>
-                <Text>{exp.description}</Text>
-                <Text>Logros</Text>
-              </>
-            ))}
-          </View>
-          <View style={styles.line}></View>
-          <View>
-            <Text style={styles.title}>PERIODO 2018-2023</Text>
-            <View
-              style={{ flexDirection: "row", marginBottom: 4, width: "80%" }}
-            >
-              <View style={{ flexDirection: "row", width: "50%" }}>
-                <Text style={{ marginHorizontal: 8 }}>•</Text>
-                <Text>Cargo: asdfasdfdasfasdfasdf</Text>
               </View>
-              <View style={{ flexDirection: "row", width: "50%" }}>
-                <Text style={{ marginHorizontal: 8 }}>-</Text>
-                <Text>Cargo: asdfasdfdasfasdfasdaDDSFASDFDASFf</Text>
-              </View>
-            </View>
-          </View>
+            </>
+          ) : null}
           <View style={styles.line}></View>
           <View>
             <Text style={styles.title}>

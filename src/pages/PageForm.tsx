@@ -1,24 +1,10 @@
 import { Button, Container } from "@mui/material";
 import CvForm from "../components/CvForm";
-import CvPrevisualzer from "../components/CvPrevisualzer";
-import { PDFDownloadLink } from "@react-pdf/renderer";
 import { useNavigate } from "react-router-dom";
 import useCvContext from "../custom/useCvContext";
 
-const DownloadButton = () => (
-  <PDFDownloadLink document={<CvPrevisualzer />} fileName="somename.pdf">
-    {({ loading }) =>
-      loading ? (
-        "Loading document..."
-      ) : (
-        <Button variant="outlined">Descarga tu CV!</Button>
-      )
-    }
-  </PDFDownloadLink>
-);
-
 function PageForm() {
-  const { index, setIndex } = useCvContext();
+  const { setIndex } = useCvContext();
   const navigate = useNavigate();
 
   const handleBack = () => {
@@ -48,7 +34,6 @@ function PageForm() {
         Regresar
       </Button>
       <CvForm />
-      {/* <DownloadButton /> */}
     </Container>
   );
 }
