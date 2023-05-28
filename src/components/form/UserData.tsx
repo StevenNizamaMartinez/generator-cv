@@ -1,14 +1,20 @@
 import { FormGroup, Grid, TextField } from "@mui/material";
 import useCvContext from "../../custom/useCvContext";
 import TitleForm from "../TitleForm";
+import { MuiFileInput } from "mui-file-input";
 
 function UserData() {
-  const { profile, setProfile } = useCvContext();
+  const { profile, setProfile, file, setFile } = useCvContext();
+
+  const handleChange = (newFile: File | null) => {
+    console.log(newFile);
+    setFile(newFile);
+  };
 
   return (
     <FormGroup>
       <TitleForm title="Datos Personales" />
-      <Grid container gap={2}>
+      <Grid container gap={2} width="100%">
         <TextField
           label="Nombres"
           variant="outlined"
@@ -60,6 +66,13 @@ function UserData() {
           value={profile?.dni}
           placeholder="12345678"
           onChange={(e) => setProfile({ ...profile, dni: e.target.value })}
+        />
+        <MuiFileInput
+          size="small"
+          variant="outlined"
+          value={file}
+          label="Foto de Perfil"
+          onChange={handleChange}
         />
       </Grid>
     </FormGroup>

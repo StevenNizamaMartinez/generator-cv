@@ -1,16 +1,13 @@
-import { Box, Button, Container, Grid } from "@mui/material";
-import UserData from "./form/UserData";
-import UserSumary from "./form/UserSumary";
-import useCvContext from "../custom/useCvContext";
-import UserEducation from "./form/UserEducation";
-import UserKnowledge from "./form/UserKnowledge";
-import UserExperience from "./form/UserExperience";
-import UserSeminars from "./form/UserSeminars";
-import UserAchievements from "./form/UserAchievements";
+import { Box, Container } from "@mui/material";
 import CvButtons from "./CvButtons";
+import { useParams } from "react-router-dom";
+import PathCvNoExperience from "./routes/PathCvNoExperience";
+import PathCvExperience from "./routes/PathCvExperience";
+import PathCvMiddle from "./routes/PathCvMiddle";
+import PathCvSenior from "./routes/PathCvSenior";
 
 function CvForm() {
-  const { index } = useCvContext();
+  const { id } = useParams();
 
   return (
     <Container
@@ -20,16 +17,30 @@ function CvForm() {
       }}
     >
       <Box component="form" onSubmit={(e) => e.preventDefault()}>
-        <>
-          {index === 0 ? <UserData /> : null}
-          {index === 1 ? <UserSumary /> : null}
-          {index === 2 ? <UserEducation /> : null}
-          {index === 3 ? <UserKnowledge /> : null}
-          {index === 4 ? <UserExperience /> : null}
-          {index === 5 ? <UserSeminars /> : null}
-          {index === 6 ? <UserAchievements /> : null}
-        </>
-        <CvButtons maxIndex={6} />
+        {parseInt(id as string) === 1 ? (
+          <>
+            <PathCvNoExperience />
+            <CvButtons maxIndex={6} />
+          </>
+        ) : null}
+        {parseInt(id as string) === 2 ? (
+          <>
+            <PathCvExperience />
+            <CvButtons maxIndex={7} />
+          </>
+        ) : null}
+        {parseInt(id as string) === 3 ? (
+          <>
+            <PathCvMiddle />
+            <CvButtons maxIndex={7} />
+          </>
+        ) : null}
+        {parseInt(id as string) === 4 ? (
+          <>
+            <PathCvSenior />
+            <CvButtons maxIndex={7} />
+          </>
+        ) : null}
       </Box>
     </Container>
   );

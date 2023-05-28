@@ -1,15 +1,11 @@
 import React, { createContext, useState } from "react";
-import {
-  CvContextProps,
-  IEducation,
-  IExperience,
-  IProfile,
-} from "../types/context";
+import { CvContextProps, IProfile } from "../types/context";
 
 export const CvContext = createContext<CvContextProps>({} as CvContextProps);
 
 export const CvProvider = ({ children }: { children: React.ReactNode }) => {
   const [index, setIndex] = useState(0);
+  const [file, setFile] = useState<File | null>(null);
   const [expanded, setExpanded] = useState<Record<number, boolean>>({
     0: true,
   });
@@ -43,7 +39,7 @@ export const CvProvider = ({ children }: { children: React.ReactNode }) => {
         level: "",
       },
     ],
-    activities: [
+    volunteer: [
       {
         area: "",
         companyName: "",
@@ -56,6 +52,8 @@ export const CvProvider = ({ children }: { children: React.ReactNode }) => {
         jobPosition: "",
         location: "",
         workHere: false,
+        achievements: "",
+        funtions: "",
       },
     ],
     knowledge: [
@@ -77,54 +75,34 @@ export const CvProvider = ({ children }: { children: React.ReactNode }) => {
         jobPosition: "",
         location: "",
         workHere: false,
+        achievements: "",
+        funtions: "",
       },
     ],
     achievements: "",
+    references: [
+      {
+        name: "",
+        phone: "",
+      },
+    ],
   });
-  const [experience, setExperience] = useState<IExperience>({
-    area: "",
-    companyName: "",
-    description: "",
-    endDate: new Date(),
-    hierarchy: "",
-    idExperienceLaborum: "",
-    imgUrl: "",
-    jobPosition: "",
-    location: "",
-    startDate: new Date(),
-    workHere: false,
-  });
+
   const [summary, setSummary] = useState<string>(
     "Como estudiante del #### ciclo de la carrera de xxxxxxxxx, estoy interesado en desarrollarme en el área de #########. Me especializo en procesos de xxxxx, tttttttt y ccccccc, y genero valor a la empresa en tareas como la Tarea 1 y Tarea 2. He adquirido sólidos conocimientos en herramientas como xxxxxxxxx, yyyyyyyyyy y zzzzzzzz. Además, poseo un dominio avanzado del idioma xxxx."
   );
-  const [education, setEducation] = useState<IEducation>({
-    academicArea: "",
-    career: "",
-    condition: "",
-    degree: "",
-    description: "",
-    endDate: new Date(),
-    idEducationLaborum: "",
-    imgUrl: "",
-    institutionName: "",
-    startDate: new Date(),
-    studyingHere: false,
-    level: "",
-  });
 
   return (
     <CvContext.Provider
       value={{
-        experience,
-        setExperience,
+        file,
+        setFile,
         summary,
         setSummary,
         profile,
         setProfile,
         index,
         setIndex,
-        education,
-        setEducation,
         expanded,
         setExpanded,
       }}

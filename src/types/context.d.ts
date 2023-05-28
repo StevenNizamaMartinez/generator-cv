@@ -1,14 +1,12 @@
 export interface CvContextProps {
-  experience: IExperience;
-  setExperience: React.Dispatch<React.SetStateAction<IExperience>>;
   summary: string;
   setSummary: React.Dispatch<React.SetStateAction<string>>;
   profile: IProfile;
   setProfile: React.Dispatch<React.SetStateAction<IProfile>>;
   index: number;
   setIndex: React.Dispatch<React.SetStateAction<number>>;
-  education: IEducation;
-  setEducation: React.Dispatch<React.SetStateAction<IEducation>>;
+  file: File | null;
+  setFile: React.Dispatch<React.SetStateAction<File | null>>;
   expanded: Record<number, boolean>;
   setExpanded: React.Dispatch<React.SetStateAction<any>>;
 }
@@ -22,10 +20,11 @@ export type IProfile = {
   dni: string;
   education: IEducation[];
   knowledge: IKnowledge[];
-  activities: IActivities[];
   experience: IExperience[];
   seminars: ISeminars[];
   achievements: string;
+  volunteer: IVolunteer[];
+  references: IReferences[];
 };
 
 type ICard = {
@@ -37,6 +36,11 @@ type ICard = {
 export type ISeminars = {
   name: string;
   place: string;
+};
+
+export type IReferences = {
+  name: string;
+  phone: string;
 };
 
 export type IExperience = {
@@ -51,25 +55,13 @@ export type IExperience = {
   location: string;
   startDate: Date;
   workHere: boolean;
+  achievements: string;
+  funtions: string;
 };
 
 export type IKnowledge = {
   knowledgeName: string;
   level: string;
-};
-
-export type IActivities = {
-  area: string;
-  companyName: string;
-  description: string;
-  endDate: Date;
-  hierarchy: string;
-  idExperienceLaborum: string;
-  imgUrl: string;
-  jobPosition: string;
-  location: string;
-  startDate: Date;
-  workHere: boolean;
 };
 
 export type IEducation = {
@@ -87,7 +79,7 @@ export type IEducation = {
   level: string;
 };
 
-export type IExperience = {
+export type IVolunteer = {
   area: string;
   companyName: string;
   description: string;
@@ -98,5 +90,7 @@ export type IExperience = {
   jobPosition: string;
   location: string;
   startDate: Date;
-  workHere: bolean;
+  workHere: boolean;
+  achievements: string;
+  funtions: string;
 };

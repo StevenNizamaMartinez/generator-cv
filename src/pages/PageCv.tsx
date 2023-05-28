@@ -1,10 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import CvPrevisualzer from "../components/CvPrevisualzer";
 import { Button, Container } from "@mui/material";
-import useCvContext from "../custom/useCvContext";
 
 function PageCv() {
-  const { setIndex } = useCvContext();
   const navigate = useNavigate();
   const handleBack = () => {
     navigate(-1);
@@ -24,6 +22,7 @@ function PageCv() {
         sx={{
           alignSelf: "flex-start",
           marginBottom: "12px",
+          bgcolor: "#DF321A",
         }}
         variant="contained"
         onClick={handleBack}

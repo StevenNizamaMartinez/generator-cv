@@ -44,7 +44,7 @@ function CardSeminars({ index, expanded, setExpanded }: ICard) {
 
   const handleDelete = () => {
     console.log("Eliminado");
-    const updatedSeminarsList = { ...seminars };
+    const updatedSeminarsList = seminars;
     updatedSeminarsList.splice(index, 1);
     setProfile((prev) => {
       return {
@@ -57,7 +57,7 @@ function CardSeminars({ index, expanded, setExpanded }: ICard) {
   };
 
   const updateSeminars = (updatedSeminars: ISeminars) => {
-    const updatedSeminarsList = { ...seminars };
+    const updatedSeminarsList = seminars;
     updatedSeminarsList[index] = updatedSeminars;
     setProfile((prev) => {
       return {

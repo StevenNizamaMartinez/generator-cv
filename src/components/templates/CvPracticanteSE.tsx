@@ -8,12 +8,10 @@ import {
 } from "@react-pdf/renderer";
 import { styles } from "../../data/styles";
 import useCvContext from "../../custom/useCvContext";
-import image from "../../assets/image.jpg";
-
-const exist = true;
+import dayjs from "dayjs";
 
 function CvPracticanteSE() {
-  const { profile, summary } = useCvContext();
+  const { profile, summary, file } = useCvContext();
   console.log(profile);
   return (
     <PDFViewer>
@@ -26,10 +24,9 @@ function CvPracticanteSE() {
             </Text>
           </View>
           <View style={styles.image}>
-            {exist ? (
+            {file ? (
               <Image
-                src={image}
-                source={image}
+                src={URL.createObjectURL(file as Blob)}
                 style={{
                   width: "100px",
                   height: "120px",
@@ -106,15 +103,22 @@ function CvPracticanteSE() {
             <Text style={styles.title}>
               ACTIVIDADES EXTRA ACADÉMICAS Y VOLUNTARIADOS
             </Text>
-            <Text style={styles.subTitle}>Nombre de la Empresa</Text>
-            <Text>Cargo</Text>
-            <View style={{ flexDirection: "row", marginBottom: 4 }}>
-              <Text style={{ marginHorizontal: 8 }}>•</Text>
-              <Text>Funciones:</Text>
-            </View>
-            <Text>Fecha de Inicio - Fecha de Fin</Text>
-            <Text>Objetivo del puesto</Text>
-            <Text>Logros</Text>
+            {profile.experience.map((exp) => (
+              <>
+                <Text style={styles.subTitle}>{exp.companyName}</Text>
+                <Text>{exp.jobPosition}</Text>
+                <View style={{ flexDirection: "row", marginBottom: 4 }}>
+                  <Text style={{ marginHorizontal: 8 }}>•</Text>
+                  <Text>Funciones: {exp.funtions}</Text>
+                </View>
+                <Text>
+                  {dayjs(exp.startDate).format("YYYY-MM")} -{" "}
+                  {dayjs(exp.endDate).format("YYYY-MM")}
+                </Text>
+                <Text>{exp.description}</Text>
+                <Text>{exp.achievements}</Text>
+              </>
+            ))}
           </View>
           <View style={styles.line}></View>
           <View style={{ marginBottom: "4" }}>
@@ -130,7 +134,6 @@ function CvPracticanteSE() {
           </View>
           <View style={styles.line}></View>
           <View style={{ marginBottom: "4" }}>
-            ||
             <Text style={styles.title}>LOGROS ACADÉMICOS Y PERSONALES</Text>
             <Text style={styles.content}>{profile.achievements}</Text>
           </View>

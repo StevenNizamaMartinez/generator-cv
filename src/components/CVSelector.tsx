@@ -1,6 +1,7 @@
 import { Box, Grid, Typography } from "@mui/material";
 import { profiles } from "../data/profile";
 import { useNavigate } from "react-router-dom";
+import Laborum from "../assets/Laborum.png";
 
 function CVSelector() {
   const navigate = useNavigate();
@@ -12,8 +13,9 @@ function CVSelector() {
 
   return (
     <>
+      <img src={Laborum} width="200px" />
       <Typography variant="h3" m={4} fontSize={24}>
-        Selecciona tu opción que más se adecue
+        Selecciona la opción que más se adapte a tu perfil
       </Typography>
       <Grid container spacing={2} justifyContent="center">
         {profiles.map((profile) => (
@@ -23,14 +25,15 @@ function CVSelector() {
               onClick={handleClick}
               sx={{
                 height: "75px",
-                bgcolor: "primary.main",
+                bgcolor: "#DF321A",
                 color: "white",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                borderRadius: "10px",
                 cursor: "pointer",
                 "&:hover": {
-                  bgcolor: "primary.dark",
+                  bgcolor: "#E34732",
                 },
               }}
             >

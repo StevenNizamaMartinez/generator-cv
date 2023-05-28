@@ -1,18 +1,18 @@
 import useCvContext from "../../custom/useCvContext";
-import { IExperience } from "../../types/context";
+import { IVolunteer } from "../../types/context";
 import { Box, Button } from "@mui/material";
-import CardExperience from "./Card/CardExperience";
 import { useState } from "react";
 import TitleForm from "../TitleForm";
+import CardVolunteers from "./Card/CardVolunteers";
 
-function UserExperience() {
+function UserVolunteers() {
   const { profile, setProfile } = useCvContext();
   const [expanded, setExpanded] = useState<Record<number, boolean>>({
     0: true,
   });
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    const newExperience: IExperience = {
+    const newVolunteer: IVolunteer = {
       area: "",
       companyName: "",
       description: "",
@@ -29,7 +29,7 @@ function UserExperience() {
     };
     setProfile({
       ...profile,
-      experience: [...profile.experience, newExperience],
+      volunteer: [...profile.volunteer, newVolunteer],
     });
     setExpanded((prevState: Record<number, boolean>) => {
       const newExpanded = { ...prevState };
@@ -44,9 +44,9 @@ function UserExperience() {
 
   return (
     <>
-      <TitleForm title="Experiencia" />
-      {profile.experience.map((_, index) => (
-        <CardExperience
+      <TitleForm title="Voluntariados" />
+      {profile.volunteer.map((_, index) => (
+        <CardVolunteers
           key={index}
           index={index}
           expanded={expanded}
@@ -61,11 +61,11 @@ function UserExperience() {
         }}
       >
         <Button variant="outlined" onClick={handleClick}>
-          Añadir Experiencia
+          Añadir Voluntariado
         </Button>
       </Box>
     </>
   );
 }
 
-export default UserExperience;
+export default UserVolunteers;

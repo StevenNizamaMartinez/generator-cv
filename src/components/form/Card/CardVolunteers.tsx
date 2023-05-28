@@ -16,10 +16,7 @@ import {
   Input,
   MenuItem,
   Select,
-  Switch,
   TextField,
-  ToggleButton,
-  ToggleButtonGroup,
 } from "@mui/material";
 import { useState } from "react";
 import useCvContext from "../../../custom/useCvContext";
@@ -47,13 +44,13 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 // Componente
 
-export default function CardExperience({
+export default function CardVolunteers({
   index,
   expanded,
   setExpanded,
 }: ICard) {
   const {
-    profile: { experience },
+    profile: { volunteer },
     setProfile,
   } = useCvContext();
 
@@ -69,19 +66,19 @@ export default function CardExperience({
   };
 
   const updateExperience = (updatedExperience: IExperience) => {
-    const updatedExperienceList = [...experience];
+    const updatedExperienceList = [...volunteer];
     updatedExperienceList[index] = updatedExperience;
     setProfile((prevProfile) => ({
       ...prevProfile,
-      experience: updatedExperienceList,
+      volunteer: updatedExperienceList,
     }));
   };
   const handleDelete = () => {
-    const updatedExperienceList = [...experience];
+    const updatedExperienceList = [...volunteer];
     updatedExperienceList.splice(index, 1);
     setProfile((prevProfile) => ({
       ...prevProfile,
-      experience: updatedExperienceList,
+      volunteer: updatedExperienceList,
     }));
     setExpanded(deleteExpand(expanded, index));
     setOpen(false);
@@ -117,7 +114,7 @@ export default function CardExperience({
             open={open}
             setOpen={setOpen}
             handleDelete={handleDelete}
-            textButton="Eliminar Educación"
+            textButton="Eliminar Voluntariado"
           />
           <CardHeader
             sx={{
@@ -128,13 +125,13 @@ export default function CardExperience({
             title={
               !expanded[index] ? (
                 <Typography variant="h6" fontSize="16px" fontWeight="bold">
-                  {experience[index].jobPosition}
+                  {volunteer[index].jobPosition}
                   <br />
-                  {experience[index].companyName}
+                  {volunteer[index].companyName}
                 </Typography>
               ) : (
                 <Typography variant="h6" fontSize="16px" fontWeight="bold">
-                  Experiencias Laborales o Prácticas
+                  Experiencias en Voluntariados
                 </Typography>
               )
             }
@@ -164,10 +161,10 @@ export default function CardExperience({
                   placeholder="Nombre del Puesto"
                   size="small"
                   name="jobPosition"
-                  value={experience[index].jobPosition}
+                  value={volunteer[index].jobPosition}
                   onChange={(e) => {
                     const updatedExperience = {
-                      ...experience[index],
+                      ...volunteer[index],
                       jobPosition: e.target.value,
                     };
                     updateExperience(updatedExperience);
@@ -180,7 +177,7 @@ export default function CardExperience({
                   name="companyName"
                   onChange={(e) => {
                     const updatedExperience = {
-                      ...experience[index],
+                      ...volunteer[index],
                       companyName: e.target.value,
                     };
                     updateExperience(updatedExperience);
@@ -189,10 +186,10 @@ export default function CardExperience({
                 <Select
                   required
                   size="small"
-                  value={experience[index].hierarchy}
+                  value={volunteer[index].hierarchy}
                   onChange={(e) => {
                     const updatedExperience = {
-                      ...experience[index],
+                      ...volunteer[index],
                       hierarchy: e.target.value,
                     };
                     updateExperience(updatedExperience);
@@ -207,10 +204,10 @@ export default function CardExperience({
                 <Select
                   required
                   size="small"
-                  value={experience[index].area}
+                  value={volunteer[index].area}
                   onChange={(e) => {
                     const updatedExperience = {
-                      ...experience[index],
+                      ...volunteer[index],
                       area: e.target.value,
                     };
                     updateExperience(updatedExperience);
@@ -227,10 +224,10 @@ export default function CardExperience({
                   size="small"
                   label="Funciones"
                   name="funtions"
-                  value={experience[index].funtions}
+                  value={volunteer[index].funtions}
                   onChange={(e) => {
                     const updatedExperience = {
-                      ...experience[index],
+                      ...volunteer[index],
                       funtions: e.target.value,
                     };
                     updateExperience(updatedExperience);
@@ -241,10 +238,10 @@ export default function CardExperience({
                   size="small"
                   label="Objetivo"
                   name="description"
-                  value={experience[index].description}
+                  value={volunteer[index].description}
                   onChange={(e) => {
                     const updatedExperience = {
-                      ...experience[index],
+                      ...volunteer[index],
                       description: e.target.value,
                     };
                     updateExperience(updatedExperience);
@@ -255,10 +252,10 @@ export default function CardExperience({
                   size="small"
                   label="Logros"
                   name="achievements"
-                  value={experience[index].achievements}
+                  value={volunteer[index].achievements}
                   onChange={(e) => {
                     const updatedExperience = {
-                      ...experience[index],
+                      ...volunteer[index],
                       achievements: e.target.value,
                     };
                     updateExperience(updatedExperience);
@@ -271,10 +268,10 @@ export default function CardExperience({
                       label={"Fecha de Inicio"}
                       views={["month", "year"]}
                       format="MM/YYYY"
-                      value={dayjs(experience[index].endDate)}
+                      value={dayjs(volunteer[index].endDate)}
                       onChange={(date: Dayjs | null) => {
                         const updatedExperience = {
-                          ...experience[index],
+                          ...volunteer[index],
                           startDate: new Date(dayjs(date).format()),
                         };
                         updateExperience(updatedExperience);
@@ -286,11 +283,11 @@ export default function CardExperience({
                       label={"Fecha de Finalización"}
                       views={["month", "year"]}
                       format="MM/YYYY"
-                      disabled={experience[index].workHere ? true : false}
-                      value={dayjs(experience[index].endDate)}
+                      disabled={volunteer[index].workHere ? true : false}
+                      value={dayjs(volunteer[index].endDate)}
                       onChange={(date: Dayjs | null) => {
                         const updatedExperience = {
-                          ...experience[index],
+                          ...volunteer[index],
                           endDate: new Date(dayjs(date).format()),
                         };
                         updateExperience(updatedExperience);
@@ -299,7 +296,7 @@ export default function CardExperience({
                   </Grid>
                 </Grid>
                 <FormControlLabel
-                  label="Trabajo aqui actualmente"
+                  label="Soy voluntario aquí"
                   control={
                     <Checkbox checked={checked} onChange={handleChange} />
                   }

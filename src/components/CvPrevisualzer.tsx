@@ -11,8 +11,6 @@ const CvPrevisualzer = () => {
   if (id === "2") return <CvPracticanteCE />;
   if (id === "3") return <CvAsistente />;
   if (id === "4") return <CvSenior />;
-
-  return <h2>Hola {id}</h2>;
 };
 
 export default CvPrevisualzer;

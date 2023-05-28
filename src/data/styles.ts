@@ -57,6 +57,7 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: "14px",
     fontFamily: "Catamaran-Bold",
+    width: "90%",
   },
   description: {
     fontSize: "12px",

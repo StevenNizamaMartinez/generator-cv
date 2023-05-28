@@ -42,10 +42,10 @@ function PageForm() {
         sx={{
           alignSelf: "flex-start",
         }}
-        variant="contained"
+        variant="outlined"
         onClick={handleBack}
       >
-        Regresar {index}
+        Regresar
       </Button>
       <CvForm />
       {/* <DownloadButton /> */}
