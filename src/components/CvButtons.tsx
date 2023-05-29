@@ -12,6 +12,7 @@ function CvButtons({ maxIndex }: { maxIndex: number }) {
     <Grid container gap="20px" sx={{ width: "100%" }} mt={4}>
       {index === 0 ? null : (
         <Button
+          type="submit"
           variant="contained"
           onClick={() => {
             setIndex(index - 1);
@@ -23,6 +24,7 @@ function CvButtons({ maxIndex }: { maxIndex: number }) {
       )}
       {index === maxIndex ? (
         <Button
+          type="submit"
           color="success"
           variant="contained"
           onClick={() => {
@@ -37,6 +39,7 @@ function CvButtons({ maxIndex }: { maxIndex: number }) {
         </Button>
       ) : (
         <Button
+          type="submit"
           variant="contained"
           onClick={() => {
             if (index === maxIndex) return;

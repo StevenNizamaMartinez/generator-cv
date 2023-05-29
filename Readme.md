@@ -35,3 +35,5 @@ npm run dev
 Me esta faltando : 
  - Refactorizar el codigo
  - Añadir el selector de colores
+ - Validaciones de los formularios
+ - No tengo experiencia en voluntariados

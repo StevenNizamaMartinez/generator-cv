@@ -9,6 +9,13 @@ import PathCvSenior from "./routes/PathCvSenior";
 function CvForm() {
   const { id } = useParams();
 
+  const handleSubmit = (e: React.FormEvent<HTMLElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget as HTMLFormElement);
+    const data = Object.fromEntries(formData);
+    console.log(data);
+  };
+
   return (
     <Container
       sx={{
@@ -16,7 +23,7 @@ function CvForm() {
         width: "50%",
       }}
     >
-      <Box component="form" onSubmit={(e) => e.preventDefault()}>
+      <Box component="form" onSubmit={handleSubmit}>
         {parseInt(id as string) === 1 ? (
           <>
             <PathCvNoExperience />

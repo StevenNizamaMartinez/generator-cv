@@ -18,8 +18,10 @@ function UserData() {
       <TitleForm title="Datos Personales" />
       <Grid container gap={2} width="100%">
         <TextField
+          required
           label="Nombres"
           variant="outlined"
+          placeholder="Juan"
           size="small"
           name="name"
           value={profile?.name}
@@ -30,7 +32,7 @@ function UserData() {
           variant="outlined"
           size="small"
           name="lastname"
-          placeholder="correo@gmail.com"
+          placeholder="Perez"
           onChange={(e) => setProfile({ ...profile, lastname: e.target.value })}
         />
         <TextField
