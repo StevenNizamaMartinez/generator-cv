@@ -1,7 +1,13 @@
 import { Box, Button, Container, Typography } from "@mui/material";
 import { PDFDownloadLink } from "@react-pdf/renderer";
+import useCvContext from "../custom/useCvContext";
 
 function CvDownload({ document }: { document: JSX.Element }) {
+  const { profile } = useCvContext();
+  const name =
+    profile?.name.length > 0
+      ? `${profile.name.trim()} ${profile.lastname}`
+      : "cv";
   return (
     <Container
       sx={{
@@ -23,7 +29,7 @@ function CvDownload({ document }: { document: JSX.Element }) {
           Felicitaciones tu Cv se ha generado de manera exitosa
         </Typography>
       </Box>
-      <PDFDownloadLink document={document} fileName="cv.pdf">
+      <PDFDownloadLink document={document} fileName={`${name}.pdf`}>
         {({ loading }) =>
           loading ? (
             <Button variant="contained" disabled>
