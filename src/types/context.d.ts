@@ -9,6 +9,8 @@ export interface CvContextProps {
   setFile: React.Dispatch<React.SetStateAction<File | null>>;
   expanded: Record<number, boolean>;
   setExpanded: React.Dispatch<React.SetStateAction<any>>;
+  color: string;
+  setColor: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export type IProfile = {

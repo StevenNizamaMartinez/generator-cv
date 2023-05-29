@@ -18,6 +18,8 @@ Font.register({
   src: myFontExtra,
 });
 
+const color = localStorage.getItem("color");
+
 export const styles = StyleSheet.create({
   page: {
     marginLeft: "30px",
@@ -44,13 +46,13 @@ export const styles = StyleSheet.create({
   line: {
     width: "55%",
     height: "2px",
-    backgroundColor: "#BCA97E",
+    backgroundColor: `${color}`,
     marginVertical: "8px",
   },
   lineHeader: {
     width: "92%",
     height: "32px",
-    backgroundColor: "#BCA97E",
+    backgroundColor: `${color}`,
     marginBottom: "4px",
     position: "absolute",
   },

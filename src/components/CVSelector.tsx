@@ -8,7 +8,7 @@ function CVSelector() {
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const id = e.currentTarget.id;
-    navigate(`/form/${id}`);
+    navigate(`/color/${id}`);
   };
 
   return (
